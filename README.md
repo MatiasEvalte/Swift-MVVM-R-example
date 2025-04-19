@@ -2,6 +2,7 @@
 
 ![Swift](https://img.shields.io/badge/Swift-5.0-orange?style=flat-square&logo=swift)
 ![iOS](https://img.shields.io/badge/iOS-12%2B-lightgrey?style=flat-square&logo=apple)
+![MVVM](https://img.shields.io/badge/MVVM-Architecture-informational?style=flat-square)
 
 > Um template leve e funcional utilizando a arquitetura **MVVM-R (Model-View-ViewModel-Router)** em Swift, com foco na organização de responsabilidades e escalabilidade.  
 > O projeto simula a injeção de dependência usando **mocks de serviços**, facilitando o entendimento e a aplicação prática da arquitetura.
