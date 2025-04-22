@@ -14,7 +14,7 @@
 		E6D42AC22DB3DA1200A3CF5F /* Exceptions for "Swift-MVVM-R-example" folder in "Swift-MVVM-R-example" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Essencials/Info.plist,
 			);
 			target = E6D42AAF2DB3DA1000A3CF5F /* Swift-MVVM-R-example */;
 		};
