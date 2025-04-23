@@ -7,6 +7,7 @@ final class ContactsViewController: UIViewController {
   // MARK: - Internal Variables
   
   let viewModel: ContactsViewModelProtocol
+  let baseView = ContactsView()
   
   // MARK: - Init
   
@@ -20,8 +21,7 @@ final class ContactsViewController: UIViewController {
   }
   
   override func loadView() {
-    /// Substitui a view principal pela ContactsView...
-    view = ContactsView()
+    view = baseView
   }
   
   // MARK: - Life Cicle
@@ -30,7 +30,49 @@ final class ContactsViewController: UIViewController {
     super.viewDidLoad()
     title = "Contatos"
     
+    baseView.tableView.delegate = self
+    baseView.tableView.dataSource = self
     viewModel.getcontacts()
+    
+    viewModel.updateView.addObservation(for: self) { viewController, state in
+      switch state {
+      case .notRequested:
+        break
+      case .isLoading:
+        viewController.baseView.activityIndicator.startAnimating()
+        viewController.baseView.activityIndicator.isHidden = false
+      case .loaded:
+        viewController.baseView.activityIndicator.stopAnimating()
+        viewController.baseView.activityIndicator.isHidden = true
+        viewController.baseView.titleLabel.isHidden = true
+        viewController.baseView.tableView.reloadData()
+      case .failed:
+        viewController.baseView.activityIndicator.stopAnimating()
+        viewController.baseView.activityIndicator.isHidden = true
+        viewController.baseView.titleLabel.isHidden = false
+      }
+    }
   }
 }
 
+// MARK: - UITableViewDataSource
+
+extension ContactsViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return viewModel.contacts.count
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    cell.textLabel?.text = viewModel.contacts[indexPath.row].name
+    return cell
+  }
+}
+
+// MARK: - UITableViewDelegate
+
+extension ContactsViewController: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    // Criar ação de clique das células...
+  }
+}

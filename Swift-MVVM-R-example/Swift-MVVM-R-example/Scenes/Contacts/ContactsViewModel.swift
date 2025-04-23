@@ -8,6 +8,9 @@ protocol ContactsNavigationDelegate: AnyObject {
 // MARK: - ContactsViewModelProtocol
 
 protocol ContactsViewModelProtocol {
+  var updateView: Bindable<Loadable<Bool>> { get }
+  var contacts: [Contact] { get }
+  
   func getcontacts()
 }
 
@@ -18,6 +21,9 @@ final class ContactsViewModel {
   
   private weak var navigationDelegate: ContactsNavigationDelegate?
   private var service: ContactsWorkerProtocol
+  
+  var contacts: [Contact] = []
+  let updateView: Bindable<Loadable<Bool>> = Bindable(.notRequested)
   
   // MARK: - Init
   
@@ -32,14 +38,16 @@ final class ContactsViewModel {
 
 extension ContactsViewModel: ContactsViewModelProtocol {
   func getcontacts() {
+    updateView.update(with: Loadable.isLoading(last: nil))
     service.getContacts { [weak self] result in
       guard let self = self else { return }
       
       switch result {
       case .success(let contacts):
-        print("Lista de contatos: \(contacts)")
+        self.contacts = contacts
+        updateView.update(with: Loadable.loaded(true))
       case .failure(let error):
-        print("Erro: \(error)")
+        updateView.update(with: Loadable.failed(error))
       }
     }
   }

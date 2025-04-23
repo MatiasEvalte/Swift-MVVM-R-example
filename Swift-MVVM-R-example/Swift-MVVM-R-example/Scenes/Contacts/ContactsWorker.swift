@@ -1,3 +1,4 @@
+import Foundation
 
 // MARK: - ContactsWorkerProtocol
 
@@ -27,6 +28,8 @@ extension ContactsWorker: ContactsWorkerProtocol {
                                         lastName: "Evalte",
                                         number: "51 999999999")
     
-    completion(.success([contactOne, contactTwo, contactThree]))
+    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+      completion(.success([contactOne, contactTwo, contactThree]))
+    }
   }
 }
