@@ -63,8 +63,12 @@ extension ContactsViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.textLabel?.text = viewModel.contacts[indexPath.row].name
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: ContactsCellView.identifier,
+                                                   for: indexPath) as? ContactsCellView else {
+      return UITableViewCell()
+    }
+    
+    cell.configure(model: viewModel.contacts[indexPath.row])
     return cell
   }
 }
@@ -73,6 +77,6 @@ extension ContactsViewController: UITableViewDataSource {
 
 extension ContactsViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    // Criar ação de clique das células...
+    viewModel.contactProfile(contactDetail: viewModel.contacts[indexPath.row])
   }
 }

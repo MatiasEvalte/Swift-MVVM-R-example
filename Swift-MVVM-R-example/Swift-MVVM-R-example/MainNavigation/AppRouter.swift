@@ -29,7 +29,10 @@ class AppRouter: AppRouterProtocol {
 // MARK: - ContactsNavigationDelegate
 
 extension AppRouter: ContactsNavigationDelegate {
-  func showDetailScreen() {
-    // Chamar tela de detalhes...
+  func showContactProfileScreen(contactDetail: Contact) {
+    let viewModel = ContactProfileViewModel(navigationDelegate: self,
+                                            contactDetail: contactDetail)
+    let viewController = ContactProfileViewController(viewModel: viewModel)
+    navigationController.pushViewController(viewController, animated: true)
   }
 }

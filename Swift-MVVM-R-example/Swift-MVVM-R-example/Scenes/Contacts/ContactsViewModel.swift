@@ -2,7 +2,7 @@
 // MARK: - ContactsNavigationDelegate
 
 protocol ContactsNavigationDelegate: AnyObject {
-  func showDetailScreen()
+  func showContactProfileScreen(contactDetail: Contact)
 }
 
 // MARK: - ContactsViewModelProtocol
@@ -12,6 +12,7 @@ protocol ContactsViewModelProtocol {
   var contacts: [Contact] { get }
   
   func getcontacts()
+  func contactProfile(contactDetail: Contact)
 }
 
 // MARK: - ContactsViewModel
@@ -50,5 +51,9 @@ extension ContactsViewModel: ContactsViewModelProtocol {
         updateView.update(with: Loadable.failed(error))
       }
     }
+  }
+  
+  func contactProfile(contactDetail: Contact) {
+    navigationDelegate?.showContactProfileScreen(contactDetail: contactDetail)
   }
 }

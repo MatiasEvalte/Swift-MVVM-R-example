@@ -32,6 +32,8 @@ final class ContactsView: UIView {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     tableView.showsVerticalScrollIndicator = false
     tableView.layoutMargins = UIEdgeInsets.zero
+    tableView.register(ContactsCellView.self,
+                       forCellReuseIdentifier: ContactsCellView.identifier)
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
   }()
