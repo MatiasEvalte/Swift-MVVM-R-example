@@ -114,12 +114,12 @@ final class ContactProfileView: UIView {
     ])
   }
   
-  func configureUI(contactDetail: Contact, followers: String) {
-    nameLabel.text = contactDetail.name
-    nicknameLabel.text = contactDetail.nickName
-    followersLabel.text = followers
-    followButton.setTitle(contactDetail.buttonTitleFollow, for: UIControl.State.normal)
-    unfollowButton.setTitle(contactDetail.buttonTitleUnfollow, for: UIControl.State.normal)
+  func configureUI(contactProfile: ContactProfile) {
+    nameLabel.text = contactProfile.name
+    nicknameLabel.text = contactProfile.nickName
+    followersLabel.text = contactProfile.followers
+    followButton.setTitle(contactProfile.buttonTitleFollow, for: UIControl.State.normal)
+    unfollowButton.setTitle(contactProfile.buttonTitleUnfollow, for: UIControl.State.normal)
   }
   
   func followButtonEnabled(isEnabled: Bool, followers: String) {

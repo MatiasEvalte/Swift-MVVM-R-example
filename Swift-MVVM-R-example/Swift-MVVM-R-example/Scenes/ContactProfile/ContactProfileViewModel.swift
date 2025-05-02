@@ -7,6 +7,7 @@ protocol ContactProfileViewModelProtocol {
   var userFollowers: String { get }
   
   func countFollowers()
+  func configureModelUI() -> ContactProfile
 }
 
 // MARK: - ContactProfileViewModel
@@ -15,11 +16,11 @@ final class ContactProfileViewModel {
   // MARK: - Private Variables
   
   private weak var navigationDelegate: ContactsNavigationDelegate?
+  private var isFollow: Bool = false
   
   // MARK: - Internal Variables
   
   var contactDetail: Contact
-  var isFollow: Bool = false
   var userFollowers: String = String()
   
   // MARK: - Init
@@ -50,5 +51,16 @@ extension ContactProfileViewModel: ContactProfileViewModelProtocol {
     formatter.locale = Locale(identifier: "pt_BR")
     let shorten = formatter.string (for: value) ?? "0"
     return "\(shorten) k"
+  }
+  
+  func configureModelUI() -> ContactProfile {
+    let followers = customizeNumber(value: contactDetail.followers ?? Int())
+    let model = ContactProfile(name: contactDetail.name ?? String(),
+                               nickName: contactDetail.nickName ?? String(),
+                               followers: followers,
+                               buttonTitleFollow: contactDetail.buttonTitleFollow ?? String(),
+                               buttonTitleUnfollow: contactDetail.buttonTitleUnfollow ?? String())
+    
+    return model
   }
 }

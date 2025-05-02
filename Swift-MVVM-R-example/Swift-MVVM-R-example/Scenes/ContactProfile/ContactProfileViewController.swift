@@ -30,8 +30,7 @@ final class ContactProfileViewController: UIViewController {
     super.viewDidLoad()
     title = "Perfil"
     
-    baseView.configureUI(contactDetail: viewModel.contactDetail,
-                         followers: viewModel.userFollowers)
+    baseView.configureUI(contactProfile: viewModel.configureModelUI())
     
     baseView.followButton.addTarget(self,
                                     action: #selector(followTapped),
