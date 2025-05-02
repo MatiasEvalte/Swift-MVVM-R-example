@@ -50,7 +50,7 @@ extension ContactProfileViewModel: ContactProfileViewModelProtocol {
     formatter.numberStyle = .decimal
     formatter.locale = Locale(identifier: "pt_BR")
     let shorten = formatter.string (for: value) ?? "0"
-    return "\(shorten) k"
+    return "\(shorten) k" 
   }
   
   func configureModelUI() -> ContactProfile {
