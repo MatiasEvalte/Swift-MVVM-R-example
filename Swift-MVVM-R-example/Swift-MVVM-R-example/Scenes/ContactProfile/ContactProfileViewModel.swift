@@ -1,7 +1,9 @@
 // MARK: - ContactProfileViewModelProtocol
 
 protocol ContactProfileViewModelProtocol {
+  var contactDetail: Contact { get }
   
+  func countFollowers()
 }
 
 // MARK: - ContactProfileViewModel
@@ -27,5 +29,7 @@ final class ContactProfileViewModel {
 // MARK: - Internal Methods
 
 extension ContactProfileViewModel: ContactProfileViewModelProtocol {
-  
+  func countFollowers() {
+    
+  }
 }

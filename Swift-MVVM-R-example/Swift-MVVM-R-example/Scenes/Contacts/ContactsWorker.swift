@@ -29,41 +29,60 @@ extension ContactsWorker: ContactsWorkerProtocol {
 
 extension ContactsWorker {
   func mockContacts() -> [Contact] {
-    let contactOne: Contact = Contact(name: "Matias",
-                                      lastName: "Evalte",
-                                      number: "51 111111111")
+    let contactOne = Contact(name: "Matias",
+                             nickName: "Mati",
+                             followers: 120,
+                             buttonTitleFollow: "Seguir",
+                             buttonTitleUnfollow: "Deixar de seguir")
     
-    let contactTwo: Contact = Contact(name: "Gabi",
-                                      lastName: "Fermiano",
-                                      number: "51 222222222")
+    let contactTwo = Contact(name: "Gabi",
+                             nickName: "Gabz",
+                             followers: 95,
+                             buttonTitleFollow: "Seguir",
+                             buttonTitleUnfollow: "Deixar de seguir")
     
-    let contactThree: Contact = Contact(name: "Filippo",
-                                        lastName: "Evalte",
-                                        number: "51 333333333")
+    let contactThree = Contact(name: "Filippo",
+                               nickName: "Pipe",
+                               followers: 230,
+                               buttonTitleFollow: "Seguir",
+                               buttonTitleUnfollow: "Deixar de seguir")
     
-    let contactFour: Contact = Contact(name: "Eliane",
-                                       lastName: "Evalte",
-                                       number: "51 444444444")
+    let contactFour = Contact(name: "Eliane",
+                              nickName: "Nani",
+                              followers: 310,
+                              buttonTitleFollow: "Seguir",
+                              buttonTitleUnfollow: "Deixar de seguir")
     
-    let contactFive: Contact = Contact(name: "Graci",
-                                       lastName: "Fermiano",
-                                       number: "51 555555555")
+    let contactFive = Contact(name: "Graci",
+                              nickName: "Gra",
+                              followers: 78,
+                              buttonTitleFollow: "Seguir",
+                              buttonTitleUnfollow: "Deixar de seguir")
     
-    let contactSix: Contact = Contact(name: "Rodrigo",
-                                      lastName: "Evalte",
-                                      number: "51 666666666")
+    let contactSix = Contact(name: "Rodrigo",
+                             nickName: "Digo",
+                             followers: 152,
+                             buttonTitleFollow: "Seguir",
+                             buttonTitleUnfollow: "Deixar de seguir")
     
-    let contactSeven: Contact = Contact(name: "Elisa",
-                                        lastName: "Evalte",
-                                        number: "51 777777777")
+    let contactSeven = Contact(name: "Elisa",
+                               nickName: "Lili",
+                               followers: 87,
+                               buttonTitleFollow: "Seguir",
+                               buttonTitleUnfollow: "Deixar de seguir")
     
-    let contactEight: Contact = Contact(name: "Danilo",
-                                        lastName: "Fermiano",
-                                        number: "51 888888888")
+    let contactEight = Contact(name: "Danilo",
+                               nickName: "Danilinho",
+                               followers: 204,
+                               buttonTitleFollow: "Seguir",
+                               buttonTitleUnfollow: "Deixar de seguir")
     
-    let contactNine: Contact = Contact(name: "Davi",
-                                       lastName: "Evalte",
-                                       number: "51 999999999")
+    let contactNine = Contact(name: "Davi",
+                              nickName: "Davizinho",
+                              followers: 135,
+                              buttonTitleFollow: "Seguir",
+                              buttonTitleUnfollow: "Deixar de seguir")
+    
     
     let contacts: [Contact] = [contactOne, contactTwo, contactThree,
                                contactFour, contactFive, contactSix,

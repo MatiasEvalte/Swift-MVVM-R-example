@@ -3,6 +3,8 @@
 
 struct Contact: Decodable {
   let name: String?
-  let lastName: String?
-  let number: String?
+  let nickName: String?
+  var followers: Int?
+  let buttonTitleFollow: String?
+  let buttonTitleUnfollow: String?
 }

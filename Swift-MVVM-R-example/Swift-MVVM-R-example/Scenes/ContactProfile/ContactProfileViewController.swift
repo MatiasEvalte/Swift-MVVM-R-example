@@ -29,5 +29,25 @@ final class ContactProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Perfil"
+    
+    baseView.configureUI(contactDetail: viewModel.contactDetail)
+    baseView.followButton.addTarget(self,
+                                    action: #selector(followTapped),
+                                    for: .touchUpInside)
+    baseView.unfollowButton.addTarget(self,
+                                      action: #selector(unfollowTapped),
+                                      for: .touchUpInside)
+  }
+}
+
+// MARK: - Actions
+
+extension ContactProfileViewController {
+  @objc private func followTapped() {
+    viewModel.countFollowers()
+  }
+  
+  @objc private func unfollowTapped() {
+    viewModel.countFollowers()
   }
 }
