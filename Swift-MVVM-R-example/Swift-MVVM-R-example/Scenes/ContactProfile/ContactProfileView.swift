@@ -35,23 +35,23 @@ final class ContactProfileView: UIView {
     return label
   }()
   
-  private let followersLabel: UILabel = {
-    let label = UILabel()
-    label.font = UIFont.systemFont(ofSize: 80, weight: .light)
-    label.textAlignment = .center
-    return label
-  }()
-  
   private let stackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
-    stackView.spacing = 20
+    stackView.spacing = 8
     stackView.alignment = .center
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
   
   // MARK: - Internal Variables
+  
+  let followersLabel: UILabel = {
+    let label = UILabel()
+    label.font = UIFont.systemFont(ofSize: 70, weight: .light)
+    label.textAlignment = .center
+    return label
+  }()
   
   let followButton: UIButton = {
     let button = UIButton(type: .system)
@@ -92,6 +92,7 @@ final class ContactProfileView: UIView {
     stackView.addArrangedSubview(nameLabel)
     stackView.addArrangedSubview(nicknameLabel)
     stackView.addArrangedSubview(followersLabel)
+    stackView.addArrangedSubview(UIView())
     stackView.addArrangedSubview(followButton)
     stackView.addArrangedSubview(unfollowButton)
     
@@ -101,17 +102,39 @@ final class ContactProfileView: UIView {
       profileImageView.widthAnchor.constraint(equalToConstant: Constants.width),
       profileImageView.heightAnchor.constraint(equalToConstant: Constants.height),
       
-      followButton.widthAnchor.constraint(equalToConstant: 200),
-      unfollowButton.widthAnchor.constraint(equalToConstant: 200),
+      followButton.widthAnchor.constraint(equalToConstant: 260),
+      unfollowButton.widthAnchor.constraint(equalToConstant: 260),
+      followButton.heightAnchor.constraint(equalToConstant: 48),
+      unfollowButton.heightAnchor.constraint(equalToConstant: 48),
       
-      stackView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
+      stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 32),
       stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
       stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-      stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+      stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16)
     ])
   }
   
-  func configureUI(contactDetail: Contact) {
+  func configureUI(contactDetail: Contact, followers: String) {
+    nameLabel.text = contactDetail.name
+    nicknameLabel.text = contactDetail.nickName
+    followersLabel.text = followers
+    followButton.setTitle(contactDetail.buttonTitleFollow, for: UIControl.State.normal)
+    unfollowButton.setTitle(contactDetail.buttonTitleUnfollow, for: UIControl.State.normal)
+  }
+  
+  func followButtonEnabled(isEnabled: Bool, followers: String) {
+    followersLabel.text = followers
     
+    if isEnabled {
+      followButton.backgroundColor = .systemBlue
+      unfollowButton.backgroundColor = .systemGray
+      followButton.isEnabled = isEnabled
+      unfollowButton.isEnabled = !isEnabled
+    } else {
+      followButton.backgroundColor = .systemGray
+      unfollowButton.backgroundColor = .systemBlue
+      followButton.isEnabled = isEnabled
+      unfollowButton.isEnabled = !isEnabled
+    }
   }
 }

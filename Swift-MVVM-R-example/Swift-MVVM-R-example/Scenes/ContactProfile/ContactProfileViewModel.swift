@@ -1,7 +1,10 @@
+import Foundation
+
 // MARK: - ContactProfileViewModelProtocol
 
 protocol ContactProfileViewModelProtocol {
   var contactDetail: Contact { get }
+  var userFollowers: String { get }
   
   func countFollowers()
 }
@@ -16,6 +19,8 @@ final class ContactProfileViewModel {
   // MARK: - Internal Variables
   
   var contactDetail: Contact
+  var isFollow: Bool = false
+  var userFollowers: String = String()
   
   // MARK: - Init
   
@@ -23,6 +28,7 @@ final class ContactProfileViewModel {
        contactDetail: Contact) {
     self.navigationDelegate = navigationDelegate
     self.contactDetail = contactDetail
+    self.userFollowers = customizeNumber(value: contactDetail.followers ?? 0)
   }
 }
 
@@ -30,6 +36,19 @@ final class ContactProfileViewModel {
 
 extension ContactProfileViewModel: ContactProfileViewModelProtocol {
   func countFollowers() {
+    isFollow.toggle()
+    var followersHelper = contactDetail.followers ?? 0
+    isFollow ? (followersHelper += 1) : (followersHelper -= 1)
+    contactDetail.followers = followersHelper
     
+    userFollowers = customizeNumber(value: followersHelper)
+  }
+  
+  func customizeNumber(value: Int) -> String {
+    let formatter = NumberFormatter ()
+    formatter.numberStyle = .decimal
+    formatter.locale = Locale(identifier: "pt_BR")
+    let shorten = formatter.string (for: value) ?? "0"
+    return "\(shorten) k"
   }
 }

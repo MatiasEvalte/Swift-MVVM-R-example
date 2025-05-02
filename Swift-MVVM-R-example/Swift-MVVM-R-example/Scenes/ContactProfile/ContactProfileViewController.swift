@@ -30,7 +30,9 @@ final class ContactProfileViewController: UIViewController {
     super.viewDidLoad()
     title = "Perfil"
     
-    baseView.configureUI(contactDetail: viewModel.contactDetail)
+    baseView.configureUI(contactDetail: viewModel.contactDetail,
+                         followers: viewModel.userFollowers)
+    
     baseView.followButton.addTarget(self,
                                     action: #selector(followTapped),
                                     for: .touchUpInside)
@@ -45,9 +47,13 @@ final class ContactProfileViewController: UIViewController {
 extension ContactProfileViewController {
   @objc private func followTapped() {
     viewModel.countFollowers()
+    baseView.followButtonEnabled(isEnabled: false,
+                                 followers: viewModel.userFollowers)
   }
   
   @objc private func unfollowTapped() {
     viewModel.countFollowers()
+    baseView.followButtonEnabled(isEnabled: true,
+                                 followers: viewModel.userFollowers)
   }
 }
